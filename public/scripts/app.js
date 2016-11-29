@@ -46,6 +46,7 @@ function AlbumsIndexController ($http) {
   }).then(function successCallback(deletedAlbum) {
     var index = vm.albums.indexOf(deletedAlbum);
     vm.albums.splice(index, 1);
+    location.reload();
   }, function errorCallback(response) {
     console.log('There was an error deleting the data', response);
   });
