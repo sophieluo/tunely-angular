@@ -37,5 +37,18 @@ function AlbumsIndexController ($http) {
     }, function errorCallback(response) {
       console.log('There was an error posting the data', response);
     });
-  }
+  } //end of create
+
+  vm.deleteAlbum = function (album) {
+  $http({
+    method: 'DELETE',
+    url: '/api/albums/'+ album._id
+  }).then(function successCallback(deletedAlbum) {
+    var index = vm.albums.indexOf(deletedAlbum);
+    vm.albums.splice(index, 1);
+  }, function errorCallback(response) {
+    console.log('There was an error deleting the data', response);
+  });
+} //end of delete
+
 }
