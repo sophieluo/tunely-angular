@@ -52,4 +52,23 @@ function AlbumsIndexController ($http) {
   });
 } //end of delete
 
+vm.editAlbum = function (album) {
+  $http({
+    method: 'PUT',
+    url: '/api/albums/' + album._id,
+    data: {
+      name: album.name,
+      artistName: album.artistName
+    },
+  }).then(function successCallback(updatedAlbumJson) {
+    var index = vm.albums.indexOf(updatedAlbumJson);
+    vm.albums.splice(index, 1, updatedAlbumJson);
+    console.log(updatedAlbumJson);
+    location.reload();
+    // any hiding / showing that needs to occur
+  }, function errorCallback(response) {
+    console.log('There was an error deleting the data', response);
+  });
+}
+
 }

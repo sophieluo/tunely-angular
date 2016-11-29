@@ -115,6 +115,12 @@
           </div>
         </div>
         <button class='btn btn-danger' ng-click="albumsIndexCtrl.deleteAlbum(album)">Delete Album</button>
+        <button class='btn btn-info' ng-hide="editing" ng-click="editing = true">Edit Album</button>
+        <input ng-show="editing" ng-model="album.name" type="text" class="form-control input-md">
+        <input ng-show="editing" ng-model="album.artistName" type="text" class="form-control input-md">
+        <!-- <input ng-show="editing" ng-model="album.genres" type="text" class="form-control input-md">
+        <input ng-show="editing" ng-model="album.releaseDate" type="text" class="form-control input-md"> -->
+        <button class='btn btn-success' ng-show="editing" ng-click="albumsIndexCtrl.editAlbum(album); editing = false">Save Changes</button>
       </div>
     </div>
   </body>
