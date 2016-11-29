@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="tunely">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,6 +26,38 @@
         <p>Your music binder!</p>
       </div>
     </div>
+
+    <div class="container" ng-controller="AlbumsIndexController as albumsIndexCtrl">
+        <!--html inside of here can use the information from the AlbumsIndexController-->
+        <p><b>New Album Creating:
+        <br></b> name: {{albumsIndexCtrl.newAlbum.name}}
+        <br>artist: {{albumsIndexCtrl.newAlbum.artistName}}</p>
+
+        <input type="text" class="form-control" placeholder="New album name" ng-model="albumsIndexCtrl.newAlbum.name"></input>
+        <input type="text" class="form-control" placeholder="New album artist" ng-model="albumsIndexCtrl.newAlbum.artistName"></input>
+
+        <label>Search by name: <input ng-model="search.name"></label><br>
+        <label>Search by artist:  <input ng-model="search.artistName"></label><br>
+
+        <div class="row" ng-repeat="album in albumsIndexCtrl.albums | orderBy:'name' | filter:search:strict">
+          <pre>name: {{ album.name }}
+artist: {{album.artistName}}
+genre: {{album.genres}}
+release date: {{album.releaseDate}}
+          </pre>
+        </div>
+
+        <form ng-submit="albumsIndexCtrl.createAlbum();">
+          <input type="text" class="form-control" placeholder="New album name" ng-model="albumsIndexCtrl.newAlbum.name" required></input>
+          <input type="text" class="form-control" placeholder="New album artist" ng-model="albumsIndexCtrl.newAlbum.artistName" required></input>
+          <input type="textarea" class="form-control" placeholder="New album genre" ng-model="albumsIndexCtrl.newAlbum.genres"></input>
+          <input type="text" class="form-control" placeholder="New album release date" ng-model="albumsIndexCtrl.newAlbum.releaseDate"></input>
+          <input type="submit">
+        </form>
+
+    </div>
+
+
   </body>
 
 </html>
