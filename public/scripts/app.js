@@ -44,9 +44,11 @@ function AlbumsIndexController ($http) {
     method: 'DELETE',
     url: '/api/albums/'+ album._id
   }).then(function successCallback(deletedAlbum) {
-    var index = vm.albums.indexOf(deletedAlbum);
+    console.log(deletedAlbum.data);
+    console.log(album);
+    var index = vm.albums.indexOf(album);
     vm.albums.splice(index, 1);
-    location.reload();
+    // location.reload();
   }, function errorCallback(response) {
     console.log('There was an error deleting the data', response);
   });
@@ -62,7 +64,7 @@ vm.editAlbum = function (album) {
     },
   }).then(function successCallback(updatedAlbumJson) {
     var index = vm.albums.indexOf(updatedAlbumJson);
-    vm.albums.splice(index, 1, updatedAlbumJson);
+    vm.albums.splice(index, 1, album);
     console.log(updatedAlbumJson);
     location.reload();
     // any hiding / showing that needs to occur
